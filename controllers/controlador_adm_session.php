@@ -6,18 +6,48 @@
  * @final En proceso
  *
  */
-namespace tglobally\tg_cliente\controllers;
+namespace tglobally\tg_cat_sat\controllers;
 
 use config\generales;
 use gamboamartin\errores\errores;
+use gamboamartin\system\links_menu;
 use JsonException;
+use PDO;
 use stdClass;
-
 
 class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_session {
     public bool $existe_msj = false;
     public string $include_menu = '';
     public string $mensaje_html = '';
+
+    public array $secciones = array("cat_sat_producto","cat_sat_tipo_producto","cat_sat_grupo_producto","cat_sat_clase_producto",
+        "cat_sat_division_producto");
+    public array $links_catalogos = array();
+
+    public array $links = array();
+
+    public function __construct(PDO $link, stdClass $paths_conf = new stdClass())
+    {
+        parent::__construct($link, $paths_conf);
+
+        $this->links = (new links_menu(link: $link, registro_id: $this->registro_id))->genera_links($this);
+        if (errores::$error) {
+            $error = $this->errores->error(mensaje: 'Error al inicializar links', data: $this->links);
+            print_r($error);
+            die('Error');
+        }
+
+        $this->links_catalogos["cat_sat_producto"]["titulo"] = "Productos";
+        $this->links_catalogos["cat_sat_producto"]["subtitulo"] = "Catálogo";
+        $this->links_catalogos["cat_sat_tipo_producto"]["titulo"] = "Tipos de producto";
+        $this->links_catalogos["cat_sat_tipo_producto"]["subtitulo"] = "Catálogo";
+        $this->links_catalogos["cat_sat_grupo_producto"]["titulo"] = "Grupo producto";
+        $this->links_catalogos["cat_sat_grupo_producto"]["subtitulo"] = "Catálogo";
+        $this->links_catalogos["cat_sat_clase_producto"]["titulo"] = "Clase producto";
+        $this->links_catalogos["cat_sat_clase_producto"]["subtitulo"] = "Catálogo";
+        $this->links_catalogos["cat_sat_division_producto"]["titulo"] = "División producto";
+        $this->links_catalogos["cat_sat_division_producto"]["subtitulo"] = "Catálogo";
+    }
 
     /**
      * Funcion de controlador donde se ejecutaran siempre que haya un acceso denegado
@@ -31,6 +61,23 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
 
         return array();
 
+    }
+
+    public function get_link(string $seccion, string $accion = "lista"): array|string
+    {
+        if (!property_exists($this->links, $seccion)) {
+            $error = $this->errores->error(mensaje: "Error no existe la seccion: $seccion", data: $seccion);
+            print_r($error);
+            die('Error');
+        }
+
+        if (!property_exists($this->links->$seccion, $accion)) {
+            $error = $this->errores->error(mensaje: 'Error no existe la accion', data: $accion);
+            print_r($error);
+            die('Error');
+        }
+
+        return $this->links->$seccion->$accion;
     }
 
     /**
@@ -53,10 +100,47 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
             return $this->retorno_error(mensaje:  'Error al generar template',data: $template, header: $header, ws: $ws);
         }
 
+        $this->links_catalogos = $this->inicializar_links();
+        if(errores::$error){
+            return $this->errores->error(mensaje: 'Error al inicializar links', data: $this->links_catalogos);
+        }
+
         $this->include_menu = (new generales())->path_base;
         $this->include_menu .= 'templates/inicio.php';
 
         return $template;
+    }
+
+    public function inicializar_links(): array
+    {
+        foreach ($this->secciones as $link => $valor){
+
+            $seccion = $valor;
+            $accion = "lista";
+
+            if (!is_numeric($link)){
+                $seccion = $link;
+                $accion = $valor;
+            }
+
+            if (!array_key_exists($seccion,$this->links_catalogos)){
+                $this->links_catalogos[$seccion] = array();
+            }
+
+            if (!array_key_exists("titulo",$this->links_catalogos[$seccion])){
+                $this->links_catalogos[$seccion]["titulo"] = $seccion;
+            }
+
+            if (!array_key_exists("subtitulo",$this->links_catalogos[$seccion])){
+                $this->links_catalogos[$seccion]["subtitulo"] = $accion;
+            }
+
+            $this->links_catalogos[$seccion]["link"] = $this->get_link(seccion: $seccion,accion: $accion);
+            if(errores::$error){
+                return $this->errores->error(mensaje: 'Error al obtener link', data: $this->links);
+            }
+        }
+        return $this->links_catalogos;
     }
 
     /**
