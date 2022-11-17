@@ -19,12 +19,13 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
     public bool $existe_msj = false;
     public string $include_menu = '';
     public string $mensaje_html = '';
+    public string $seccion = 'adm_seccion';
 
-    public array $secciones = array("cat_sat_producto","cat_sat_tipo_producto","cat_sat_grupo_producto","cat_sat_clase_producto",
-        "cat_sat_division_producto");
+    public array $secciones = array("cat_sat_division","cat_sat_grupo_producto","cat_sat_clase_producto","cat_sat_tipo_producto",
+        "cat_sat_producto");
     public array $links_catalogos = array();
 
-    public array $links = array();
+    public stdClass $links;
 
     public function __construct(PDO $link, stdClass $paths_conf = new stdClass())
     {
