@@ -5,7 +5,7 @@ use PDO;
 use stdClass;
 use tglobally\template_tg\html;
 
-class controlador_cat_sat_producto extends \gamboamartin\cat_sat\controllers\controlador_cat_sat_tipo_producto {
+class controlador_cat_sat_producto extends \gamboamartin\cat_sat\controllers\controlador_cat_sat_producto {
 
     public array $sidebar = array();
 

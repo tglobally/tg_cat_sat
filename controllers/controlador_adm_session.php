@@ -46,8 +46,8 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         $this->links_catalogos["cat_sat_grupo_producto"]["subtitulo"] = "Catálogo";
         $this->links_catalogos["cat_sat_clase_producto"]["titulo"] = "Clase producto";
         $this->links_catalogos["cat_sat_clase_producto"]["subtitulo"] = "Catálogo";
-        $this->links_catalogos["cat_sat_division_producto"]["titulo"] = "División producto";
-        $this->links_catalogos["cat_sat_division_producto"]["subtitulo"] = "Catálogo";
+        $this->links_catalogos["cat_sat_division"]["titulo"] = "División producto";
+        $this->links_catalogos["cat_sat_division"]["subtitulo"] = "Catálogo";
     }
 
     /**
