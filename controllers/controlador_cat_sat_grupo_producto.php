@@ -12,20 +12,20 @@ class controlador_cat_sat_grupo_producto extends \gamboamartin\cat_sat\controlle
     public function __construct(PDO $link, stdClass $paths_conf = new stdClass()){
         $html_base = new html();
         parent::__construct( link: $link, html: $html_base);
-        $this->titulo_lista = 'Clase Prodcuto';
+        $this->titulo_lista = 'Grupo Prodcuto';
 
-        $this->sidebar['lista']['titulo'] = "Clase Prodcuto";
+        $this->sidebar['lista']['titulo'] = "Grupo Prodcuto";
         $this->sidebar['lista']['menu'] = array(
             $this->menu_item(menu_item_titulo: "Alta", link: $this->link_alta,menu_seccion_active: true,
                 menu_lateral_active: true));
 
-        $this->sidebar['alta']['titulo'] = "Alta Clase Prodcuto";
+        $this->sidebar['alta']['titulo'] = "Alta Grupo Prodcuto";
         $this->sidebar['alta']['stepper_active'] = true;
         $this->sidebar['alta']['menu'] = array(
             $this->menu_item(menu_item_titulo: "Alta", link: $this->link_alta,menu_lateral_active: true),
             $this->menu_item(menu_item_titulo: "Nueva Seccion", link: $this->link_alta));
 
-        $this->sidebar['modifica']['titulo'] = "Modifica Clase Prodcuto";
+        $this->sidebar['modifica']['titulo'] = "Modifica Grupo Prodcuto";
         $this->sidebar['modifica']['stepper_active'] = true;
         $this->sidebar['modifica']['menu'] = array(
             $this->menu_item(menu_item_titulo: "Modifica", link: $this->link_alta,menu_lateral_active: true),
