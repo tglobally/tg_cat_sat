@@ -5,26 +5,26 @@ use PDO;
 use stdClass;
 use tglobally\template_tg\html;
 
-class controlador_cat_sat_moneda extends \gamboamartin\cat_sat\controllers\controlador_cat_sat_moneda {
+class controlador_cat_sat_metodo_pago extends \gamboamartin\cat_sat\controllers\controlador_cat_sat_metodo_pago {
 
     public array $sidebar = array();
 
     public function __construct(PDO $link, stdClass $paths_conf = new stdClass()){
         $html_base = new html();
         parent::__construct( link: $link, html: $html_base);
-        $this->titulo_lista = 'Moneda';
+        $this->titulo_lista = 'Metodo Pago';
 
-        $this->sidebar['lista']['titulo'] = "Moneda";
+        $this->sidebar['lista']['titulo'] = "Metodo pago";
         $this->sidebar['lista']['menu'] = array(
             $this->menu_item(menu_item_titulo: "Alta", link: $this->link_alta,menu_seccion_active: true,
                 menu_lateral_active: true));
 
-        $this->sidebar['alta']['titulo'] = "Alta Moneda";
+        $this->sidebar['alta']['titulo'] = "Alta Metodo Pago";
         $this->sidebar['alta']['stepper_active'] = true;
         $this->sidebar['alta']['menu'] = array(
             $this->menu_item(menu_item_titulo: "Alta", link: $this->link_alta,menu_lateral_active: true));
 
-        $this->sidebar['modifica']['titulo'] = "Modifica Moneda";
+        $this->sidebar['modifica']['titulo'] = "Modifica Metodo Pago";
         $this->sidebar['modifica']['stepper_active'] = true;
         $this->sidebar['modifica']['menu'] = array(
             $this->menu_item(menu_item_titulo: "Modifica", link: $this->link_alta,menu_lateral_active: true));
