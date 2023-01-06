@@ -22,7 +22,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
     public string $seccion = 'adm_seccion';
 
     public array $secciones = array("cat_sat_division_producto","cat_sat_grupo_producto","cat_sat_clase_producto","cat_sat_tipo_producto",
-        "cat_sat_producto");
+        "cat_sat_producto",'cat_sat_moneda');
     public array $links_catalogos = array();
 
     public stdClass $links;
@@ -48,6 +48,8 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         $this->links_catalogos["cat_sat_clase_producto"]["subtitulo"] = "Catálogo";
         $this->links_catalogos["cat_sat_division_producto"]["titulo"] = "División producto";
         $this->links_catalogos["cat_sat_division_producto"]["subtitulo"] = "Catálogo";
+        $this->links_catalogos["cat_sat_moneda"]["titulo"] = "Moneda";
+        $this->links_catalogos["cat_sat_moneda"]["subtitulo"] = "Catálogo";
     }
 
     /**
