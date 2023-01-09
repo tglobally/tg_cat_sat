@@ -1,4 +1,4 @@
-<?php /** @var \tglobally\tg_cat_sat\controllers\controlador_cat_sat_metodo_pago $controlador */ ?>
+<?php /** @var \tglobally\tg_cat_sat\controllers\controlador_cat_sat_tipo_producto $controlador */ ?>
 
 <?php (new \tglobally\template_tg\template())->sidebar($controlador); ?>
 
