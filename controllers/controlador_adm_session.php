@@ -23,7 +23,7 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
 
     public array $secciones = array("cat_sat_division_producto","cat_sat_grupo_producto","cat_sat_clase_producto","cat_sat_tipo_producto",
         "cat_sat_producto",'cat_sat_moneda','cat_sat_metodo_pago','cat_sat_forma_pago','cat_sat_unidad','cat_sat_obj_imp',
-        'cat_sat_uso_cfdi','cat_sat_regimen_fiscal','cat_sat_tipo_factor','cat_sat_factor');
+        'cat_sat_uso_cfdi','cat_sat_regimen_fiscal','cat_sat_tipo_factor','cat_sat_factor','cat_sat_tipo_de_comprobante');
     public array $links_catalogos = array();
 
     public stdClass $links;
@@ -67,6 +67,8 @@ class controlador_adm_session extends \gamboamartin\controllers\controlador_adm_
         $this->links_catalogos["cat_sat_tipo_factor"]["subtitulo"] = "Catálogo";
         $this->links_catalogos["cat_sat_factor"]["titulo"] = "Factor";
         $this->links_catalogos["cat_sat_factor"]["subtitulo"] = "Catálogo";
+        $this->links_catalogos["cat_sat_tipo_de_comprobante"]["titulo"] = "Tipo de Comprobante";
+        $this->links_catalogos["cat_sat_tipo_de_comprobante"]["subtitulo"] = "Catálogo";
     }
 
     /**
