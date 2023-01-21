@@ -53,7 +53,7 @@
     "gamboa.martin/system": "^6.0.0",
     "gamboa.martin/direccion_postal": "^8.0.0",
     "gamboa.martin/js_base": "^1.0.0",
-    "tglobally/template_tg": "dev-main",
+    "tglobally/template_tg": "^2.0.0",
     "gamboa.martin/cat_sat": "^6.0.0"
   },
   "require-dev": {
